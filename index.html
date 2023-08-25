@@ -10,9 +10,9 @@
 </head>
 <body>
     <main>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3732.4938946926163!2d-103.42134068861264!3d20.690159499241407!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8428aeee6450aa19%3A0x279fff05db8cc856!2sSalvador%20Madariaga%204983%2C%20Jardines%20Universidad%2C%2045110%20Zapopan%2C%20Jal.!5e0!3m2!1ses-419!2smx!4v1692724481698!5m2!1ses-419!2smx" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        <canvas id="canvas"></canvas>
-        <div class="map-div"></div>
+        <canvas id="canvas" width="700" height="420"></canvas>
+        <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3732.4938946926163!2d-103.42134068861264!3d20.690159499241407!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8428aeee6450aa19%3A0x279fff05db8cc856!2sSalvador%20Madariaga%204983%2C%20Jardines%20Universidad%2C%2045110%20Zapopan%2C%20Jal.!5e0!3m2!1ses-419!2smx!4v1692724481698!5m2!1ses-419!2smx" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> -->
+        <!-- <div class="map-div"></div> -->
     </main>
     <script>
         function start(event){
@@ -22,32 +22,35 @@
         }
 
         function reposition(event){
-           coordinates.x = event.clientX - canvas.offsetLeft;
-           coordinates.y = event.clientY - canvas.offsetTop;
-           console.log(`finishing coordinates: ${coordinates.x} ${coordinates.y}`)
+            console.log(event);
+            x = event.clientX - canvas.offsetLeft;
+            y = event.clientY - canvas.offsetTop;
+            console.log(`finishing coordinates: ${x} ${y}`)
         }
 
         function draw(event){
             ctx.beginPath();
             ctx.lineWidth = 5;
             ctx.lineCap = "round";
-            ctx.moveTo(coordinates.x, coordinates.y);
+            ctx.moveTo(x, y);
             reposition(event);
-            ctx.lineTo(coordinates.x, coordinates.y);
+            ctx.lineTo(x, y);
+            ctx.closePath();
             ctx.stroke();
+            canvas.calcOffset()
         }
 
         function stop(){
             console.log("stopped drawing")
             canvas.removeEventListener("mousemove", draw);
         }
-        let coordinates = {x:0, y:0};
+
+        let x = 0;
+        let y = 0;
         const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
         canvas.addEventListener("mousedown", start);
         canvas.addEventListener("mouseup", stop);
-        console.log(document.getElementById("canvas").getContext);
-        console.log(document.getElementById("canvas").getContext("2d"));
-        const ctx = canvas.getContext("2d");
     </script>
 </body>
 </html>
