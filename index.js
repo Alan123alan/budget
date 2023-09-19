@@ -1,3 +1,4 @@
+//TO DO: Find a way to pass attributes with less overhead than by passing maps
 window.addEventListener("load", render);
 
 function render(){
