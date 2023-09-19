@@ -1,20 +1,24 @@
-function start(){
+window.addEventListener("load", render);
 
+function render(){
+    const root = document.getElementById("root");
+    console.log(root);
+    const newP = p();
+    const newInput = input();
+    root.appendChild(newP);
+    root.appendChild(newInput);
 }
 
-function stop(){
-
+function tag(name){
+    return document.createElement(name);
 }
 
-$(document).ready(function(){
-    console.log("document is ready");
-    $(".map-div").append("<div>made-up-div</div>");
-    canvas = $("#canvas");
-    canvas.on("mousedown", start);
-    canvas.on("mouseup", stop);
-    if(canvas.getContext){
-        context = $("#canvas").getContext("2d")
-    }else{
-        console.log("Canvas is not supported");
-    }
-});
+function p(){
+    const p = tag("p");
+    return p;
+}
+
+function input(){
+    const input = tag("input");
+    return input;
+}
