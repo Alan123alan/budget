@@ -3,19 +3,15 @@ window.addEventListener("load", render);
 
 function render(){
     const root = document.getElementById("root");
-    console.log(root);
-    // const newPAttrs = new Map();
-    // newPAttrs.set("id", "my-p")
     const newP = p("some text");
-    console.log(newP.attr("id", "my-p"));
-    // const newInputAttrs = new Map();
-    // newInputAttrs.set("name", "first-input")
-    // newInputAttrs.set("type", "email")
+    newP.attr("id", "my-p");
     const newInput = input();
     newInput.attr("name", "my-input")
     newInput.attr("type", "password")
+    const newButton = button("Add Income Record");
     root.appendChild(newP);
     root.appendChild(newInput);
+    root.appendChild(newButton);
 }
 
 function element(name){
@@ -25,6 +21,11 @@ function element(name){
         return this;
     }
     return element;
+}
+
+function div(){
+    const div = element("div");
+    return div;
 }
 
 function p(text){
@@ -39,4 +40,12 @@ function p(text){
 function input(){
     const input = element("input");
     return input;
+}
+
+function button(text){
+    const button = element("button");
+    if(text){
+        button.appendChild(document.createTextNode(text));
+    }
+    return button;
 }
